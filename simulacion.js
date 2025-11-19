@@ -70,19 +70,17 @@ document.addEventListener('DOMContentLoaded', () => {
     inicializarEventListeners();
     actualizarDisplays();
     actualizarAnimacion();
-    calcularYMostrarResultados();
 });
 
 // ===================================
 // EVENT LISTENERS
 // ===================================
 function inicializarEventListeners() {
-    // Actualizar displays en tiempo real
+    // Actualizar displays y animación en tiempo real
     Object.keys(inputs).forEach(key => {
         inputs[key].addEventListener('input', () => {
             actualizarDisplays();
             actualizarAnimacion();
-            calcularYMostrarResultados();
         });
     });
 
