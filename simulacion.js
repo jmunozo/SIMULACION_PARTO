@@ -260,56 +260,336 @@ function calcularYMostrarResultados() {
 
     // ====== MOSTRAR RESULTADOS CON FÓRMULAS EXPANDIDAS ======
     
-    // Vertical - Fuerza
-    resultados.vertical.fuerza.innerHTML = `
-        F = ${m} kg × ${G} m/s²<br>
-        <strong style="color: var(--secondary-color);">F = ${F.toFixed(2)} N</strong>
-    `;
+        // Vertical - Fuerza (con SVG animado)
+        resultados.vertical.fuerza.innerHTML = `
+            <div style="display: flex; align-items: center; justify-content: space-between;">
+                <div>
+                    F = ${m} kg × ${G} m/s²<br>
+                    <strong style=\"color: var(--secondary-color);\">F = ${F.toFixed(2)} N</strong>
+                </div>
+                <div style="margin-left: 16px; min-width: 90px;">
+                    <svg width="80" height="120" viewBox="0 0 80 120" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Cabello -->
+                        <ellipse cx="40" cy="22" rx="13" ry="10" fill="#7c4a1e"/>
+                        <ellipse cx="32" cy="28" rx="7" ry="5" fill="#7c4a1e"/>
+                        <!-- Cabeza -->
+                        <ellipse cx="40" cy="28" rx="10" ry="12" fill="#f9d6b5" stroke="#b48a78" stroke-width="1.5"/>
+                        <!-- Cuello -->
+                        <rect x="36" y="38" width="8" height="8" rx="4" fill="#f9d6b5"/>
+                        <!-- Brazo izquierdo -->
+                        <rect x="18" y="48" width="7" height="28" rx="4" fill="#f9d6b5" stroke="#b48a78" stroke-width="1" transform="rotate(-18 21.5 62)"/>
+                        <!-- Brazo derecho -->
+                        <rect x="55" y="48" width="7" height="28" rx="4" fill="#f9d6b5" stroke="#b48a78" stroke-width="1" transform="rotate(18 58.5 62)"/>
+                        <!-- Cuerpo -->
+                        <ellipse cx="40" cy="62" rx="16" ry="28" fill="#f9d6b5" stroke="#b48a78" stroke-width="1.5"/>
+                        <!-- Barriga (embarazo) -->
+                        <ellipse cx="48" cy="78" rx="13" ry="16" fill="#eabfae" stroke="#b48a78" stroke-width="1.2"/>
+                        <!-- Pierna izquierda -->
+                        <rect x="30" y="90" width="7" height="25" rx="4" fill="#b48a78">
+                            <animate attributeName="y" values="90;98;90" dur="1.2s" repeatCount="indefinite"/>
+                        </rect>
+                        <!-- Pierna derecha -->
+                        <rect x="43" y="90" width="7" height="25" rx="4" fill="#b48a78">
+                            <animate attributeName="y" values="90;98;90" dur="1.2s" begin="0.6s" repeatCount="indefinite"/>
+                        </rect>
+                        <!-- Flecha de gravedad -->
+                        <g>
+                            <line x1="40" y1="10" x2="40" y2="115" stroke="#4caf50" stroke-width="2" stroke-dasharray="4 2"/>
+                            <polygon points="36,110 44,110 40,118" fill="#4caf50">
+                                <animateTransform attributeName="transform" type="translate" values="0,0;0,8;0,0" dur="1.2s" repeatCount="indefinite"/>
+                            </polygon>
+                        </g>
+                    </svg>
+                </div>
+            </div>
+        `;
     
-    // Vertical - Trabajo
+    // Vertical - Trabajo (SVG animado: mujer caminando hacia abajo, representa trabajo)
     resultados.vertical.trabajo.innerHTML = `
-        W = ${F.toFixed(2)} N × ${d} m × 1<br>
-        <strong style="color: var(--secondary-color);">W = ${W_vertical.toFixed(4)} J</strong>
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div>
+                W = ${F.toFixed(2)} N × ${d} m × 1<br>
+                <strong style=\"color: var(--secondary-color);\">W = ${W_vertical.toFixed(4)} J</strong>
+            </div>
+            <div style="margin-left: 16px; min-width: 90px;">
+                <svg width="80" height="120" viewBox="0 0 80 120" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Cabello -->
+                    <ellipse cx="40" cy="22" rx="13" ry="10" fill="#7c4a1e"/>
+                    <ellipse cx="32" cy="28" rx="7" ry="5" fill="#7c4a1e"/>
+                    <!-- Cabeza -->
+                    <ellipse cx="40" cy="28" rx="10" ry="12" fill="#f9d6b5" stroke="#b48a78" stroke-width="1.5"/>
+                    <!-- Cuello -->
+                    <rect x="36" y="38" width="8" height="8" rx="4" fill="#f9d6b5"/>
+                    <!-- Brazos -->
+                    <rect x="18" y="48" width="7" height="28" rx="4" fill="#f9d6b5" stroke="#b48a78" stroke-width="1" transform="rotate(-18 21.5 62)"/>
+                    <rect x="55" y="48" width="7" height="28" rx="4" fill="#f9d6b5" stroke="#b48a78" stroke-width="1" transform="rotate(18 58.5 62)"/>
+                    <!-- Cuerpo -->
+                    <ellipse cx="40" cy="62" rx="16" ry="28" fill="#f9d6b5" stroke="#b48a78" stroke-width="1.5"/>
+                    <!-- Barriga (embarazo) -->
+                    <ellipse cx="48" cy="78" rx="13" ry="16" fill="#eabfae" stroke="#b48a78" stroke-width="1.2"/>
+                    <!-- Piernas animadas (simulan caminar) -->
+                    <rect x="30" y="90" width="7" height="25" rx="4" fill="#b48a78">
+                        <animate attributeName="y" values="90;98;90" dur="1.2s" repeatCount="indefinite"/>
+                    </rect>
+                    <rect x="43" y="90" width="7" height="25" rx="4" fill="#b48a78">
+                        <animate attributeName="y" values="90;98;90" dur="1.2s" begin="0.6s" repeatCount="indefinite"/>
+                    </rect>
+                    <!-- Flecha de trabajo (movimiento) -->
+                    <g>
+                        <line x1="60" y1="40" x2="60" y2="110" stroke="#2196f3" stroke-width="2" stroke-dasharray="4 2"/>
+                        <polygon points="56,105 64,105 60,113" fill="#2196f3">
+                            <animateTransform attributeName="transform" type="translate" values="0,0;0,8;0,0" dur="1.2s" repeatCount="indefinite"/>
+                        </polygon>
+                    </g>
+                </svg>
+            </div>
+        </div>
     `;
     
 
-    // Vertical - Presión
+    // Vertical - Presión (SVG animado: ondas de presión sobre la barriga)
     resultados.vertical.presion.innerHTML = `
-        P = ${rho} kg/m³ × ${G} m/s² × ${h} m<br>
-        <strong style="color: var(--secondary-color);">P = ${P_hidro_vertical.toFixed(2)} Pa ≈ ${P_hidro_vertical_mmHg.toFixed(2)} mmHg</strong>
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div>
+                P = ${rho} kg/m³ × ${G} m/s² × ${h} m<br>
+                <strong style=\"color: var(--secondary-color);\">P = ${P_hidro_vertical.toFixed(2)} Pa ≈ ${P_hidro_vertical_mmHg.toFixed(2)} mmHg</strong>
+            </div>
+            <div style="margin-left: 16px; min-width: 90px;">
+                <svg width="80" height="120" viewBox="0 0 80 120" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Cabello -->
+                    <ellipse cx="40" cy="22" rx="13" ry="10" fill="#7c4a1e"/>
+                    <ellipse cx="32" cy="28" rx="7" ry="5" fill="#7c4a1e"/>
+                    <!-- Cabeza -->
+                    <ellipse cx="40" cy="28" rx="10" ry="12" fill="#f9d6b5" stroke="#b48a78" stroke-width="1.5"/>
+                    <!-- Cuello -->
+                    <rect x="36" y="38" width="8" height="8" rx="4" fill="#f9d6b5"/>
+                    <!-- Brazos -->
+                    <rect x="18" y="48" width="7" height="28" rx="4" fill="#f9d6b5" stroke="#b48a78" stroke-width="1" transform="rotate(-18 21.5 62)"/>
+                    <rect x="55" y="48" width="7" height="28" rx="4" fill="#f9d6b5" stroke="#b48a78" stroke-width="1" transform="rotate(18 58.5 62)"/>
+                    <!-- Cuerpo -->
+                    <ellipse cx="40" cy="62" rx="16" ry="28" fill="#f9d6b5" stroke="#b48a78" stroke-width="1.5"/>
+                    <!-- Barriga (embarazo) -->
+                    <ellipse cx="48" cy="78" rx="13" ry="16" fill="#eabfae" stroke="#b48a78" stroke-width="1.2"/>
+                    <!-- Ondas de presión -->
+                    <ellipse cx="48" cy="78" rx="7" ry="3" fill="none" stroke="#2196f3" stroke-width="2">
+                        <animate attributeName="rx" values="7;13;7" dur="1.2s" repeatCount="indefinite"/>
+                        <animate attributeName="opacity" values="1;0;1" dur="1.2s" repeatCount="indefinite"/>
+                    </ellipse>
+                    <!-- Piernas -->
+                    <rect x="30" y="90" width="7" height="25" rx="4" fill="#b48a78"/>
+                    <rect x="43" y="90" width="7" height="25" rx="4" fill="#b48a78"/>
+                </svg>
+            </div>
+        </div>
     `;
     resultados.vertical.presionMmHg.innerHTML = '';
     
-    // Vertical - Presión Total
+    // Vertical - Presión Total (SVG animado: ondas y flecha)
     resultados.vertical.presionTotal.innerHTML = `
-        P_total = ${P_uterina} mmHg + ${P_hidro_vertical_mmHg.toFixed(2)} mmHg<br>
-        <strong style="color: var(--secondary-color);">P_total = ${P_total_vertical.toFixed(2)} mmHg</strong>
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div>
+                P_total = ${P_uterina} mmHg + ${P_hidro_vertical_mmHg.toFixed(2)} mmHg<br>
+                <strong style=\"color: var(--secondary-color);\">P_total = ${P_total_vertical.toFixed(2)} mmHg</strong>
+            </div>
+            <div style="margin-left: 16px; min-width: 90px;">
+                <svg width="80" height="120" viewBox="0 0 80 120" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Cabello -->
+                    <ellipse cx="40" cy="22" rx="13" ry="10" fill="#7c4a1e"/>
+                    <ellipse cx="32" cy="28" rx="7" ry="5" fill="#7c4a1e"/>
+                    <!-- Cabeza -->
+                    <ellipse cx="40" cy="28" rx="10" ry="12" fill="#f9d6b5" stroke="#b48a78" stroke-width="1.5"/>
+                    <!-- Cuello -->
+                    <rect x="36" y="38" width="8" height="8" rx="4" fill="#f9d6b5"/>
+                    <!-- Brazos -->
+                    <rect x="18" y="48" width="7" height="28" rx="4" fill="#f9d6b5" stroke="#b48a78" stroke-width="1" transform="rotate(-18 21.5 62)"/>
+                    <rect x="55" y="48" width="7" height="28" rx="4" fill="#f9d6b5" stroke="#b48a78" stroke-width="1" transform="rotate(18 58.5 62)"/>
+                    <!-- Cuerpo -->
+                    <ellipse cx="40" cy="62" rx="16" ry="28" fill="#f9d6b5" stroke="#b48a78" stroke-width="1.5"/>
+                    <!-- Barriga (embarazo) -->
+                    <ellipse cx="48" cy="78" rx="13" ry="16" fill="#eabfae" stroke="#b48a78" stroke-width="1.2"/>
+                    <!-- Ondas de presión -->
+                    <ellipse cx="48" cy="78" rx="7" ry="3" fill="none" stroke="#2196f3" stroke-width="2">
+                        <animate attributeName="rx" values="7;13;7" dur="1.2s" repeatCount="indefinite"/>
+                        <animate attributeName="opacity" values="1;0;1" dur="1.2s" repeatCount="indefinite"/>
+                    </ellipse>
+                    <!-- Flecha de presión total -->
+                    <g>
+                        <line x1="60" y1="40" x2="60" y2="110" stroke="#4caf50" stroke-width="2" stroke-dasharray="4 2"/>
+                        <polygon points="56,105 64,105 60,113" fill="#4caf50">
+                            <animateTransform attributeName="transform" type="translate" values="0,0;0,8;0,0" dur="1.2s" repeatCount="indefinite"/>
+                        </polygon>
+                    </g>
+                </svg>
+            </div>
+        </div>
     `;
 
-    // Supina - Fuerza
+    // Supina - Fuerza (SVG animado: icono simple, pierna y flecha vertical)
     resultados.supina.fuerza.innerHTML = `
-        F = ${m} kg × ${G} m/s²<br>
-        <strong style="color: var(--secondary-color);">F = ${F.toFixed(2)} N</strong>
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div>
+                F = ${m} kg × ${G} m/s²<br>
+                <strong style=\"color: var(--secondary-color);\">F = ${F.toFixed(2)} N</strong>
+            </div>
+            <div style="margin-left: 16px; min-width: 90px;">
+                <svg width="120" height="80" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Cabello -->
+                    <ellipse cx="32" cy="40" rx="13" ry="10" fill="#7c4a1e"/>
+                    <ellipse cx="40" cy="48" rx="7" ry="5" fill="#7c4a1e"/>
+                    <!-- Cabeza -->
+                    <ellipse cx="40" cy="40" rx="12" ry="10" fill="#f9d6b5" stroke="#b48a78" stroke-width="1.5"/>
+                    <!-- Cuello -->
+                    <rect x="50" y="36" width="8" height="8" rx="4" fill="#f9d6b5" transform="rotate(20 54 40)"/>
+                    <!-- Brazos -->
+                    <rect x="60" y="28" width="28" height="7" rx="4" fill="#f9d6b5" stroke="#b48a78" stroke-width="1" transform="rotate(8 74 31.5)"/>
+                    <rect x="60" y="55" width="28" height="7" rx="4" fill="#f9d6b5" stroke="#b48a78" stroke-width="1" transform="rotate(-8 74 58.5)"/>
+                    <!-- Cuerpo -->
+                    <ellipse cx="70" cy="40" rx="28" ry="16" fill="#f9d6b5" stroke="#b48a78" stroke-width="1.5"/>
+                    <!-- Barriga (embarazo) -->
+                    <ellipse cx="88" cy="48" rx="16" ry="13" fill="#eabfae" stroke="#b48a78" stroke-width="1.2"/>
+                    <!-- Pierna (natural, solo una) -->
+                    <rect x="100" y="60" width="18" height="7" rx="4" fill="#b48a78">
+                        <animate attributeName="x" values="100;108;100" dur="1.2s" repeatCount="indefinite"/>
+                    </rect>
+                    <!-- Flecha de gravedad (vertical) -->
+                    <g>
+                        <line x1="88" y1="48" x2="88" y2="75" stroke="#4caf50" stroke-width="2" stroke-dasharray="4 2"/>
+                        <polygon points="84,70 92,70 88,78" fill="#4caf50">
+                            <animateTransform attributeName="transform" type="translate" values="0,0;0,8;0,0" dur="1.2s" repeatCount="indefinite"/>
+                        </polygon>
+                    </g>
+                </svg>
+            </div>
+        </div>
     `;
     
-    // Supina - Trabajo
+    // Supina - Trabajo (SVG animado: mujer echada, pierna natural, flecha azul hacia abajo)
     resultados.supina.trabajo.innerHTML = `
-        W = ${F.toFixed(2)} N × ${d} m × 0<br>
-        <strong style="color: var(--secondary-color);">W = ${W_supina.toFixed(4)} J</strong>
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div>
+                W = ${F.toFixed(2)} N × ${d} m × 0<br>
+                <strong style=\"color: var(--secondary-color);\">W = ${W_supina.toFixed(4)} J</strong>
+            </div>
+            <div style="margin-left: 16px; min-width: 90px;">
+                <svg width="120" height="80" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Cabello -->
+                    <ellipse cx="32" cy="40" rx="13" ry="10" fill="#7c4a1e"/>
+                    <ellipse cx="40" cy="48" rx="7" ry="5" fill="#7c4a1e"/>
+                    <!-- Cabeza -->
+                    <ellipse cx="40" cy="40" rx="12" ry="10" fill="#f9d6b5" stroke="#b48a78" stroke-width="1.5"/>
+                    <!-- Cuello -->
+                    <rect x="50" y="36" width="8" height="8" rx="4" fill="#f9d6b5" transform="rotate(20 54 40)"/>
+                    <!-- Brazos -->
+                    <rect x="60" y="28" width="28" height="7" rx="4" fill="#f9d6b5" stroke="#b48a78" stroke-width="1" transform="rotate(8 74 31.5)"/>
+                    <rect x="60" y="55" width="28" height="7" rx="4" fill="#f9d6b5" stroke="#b48a78" stroke-width="1" transform="rotate(-8 74 58.5)"/>
+                    <!-- Cuerpo -->
+                    <ellipse cx="70" cy="40" rx="28" ry="16" fill="#f9d6b5" stroke="#b48a78" stroke-width="1.5"/>
+                    <!-- Barriga (embarazo) -->
+                    <ellipse cx="88" cy="48" rx="16" ry="13" fill="#eabfae" stroke="#b48a78" stroke-width="1.2"/>
+                    <!-- Pierna (natural, solo una) -->
+                    <rect x="100" y="60" width="18" height="7" rx="4" fill="#b48a78">
+                        <animate attributeName="x" values="100;108;100" dur="1.2s" repeatCount="indefinite"/>
+                    </rect>
+                    <!-- Flecha de trabajo (azul, vertical) -->
+                    <g>
+                        <line x1="88" y1="48" x2="88" y2="75" stroke="#2196f3" stroke-width="2" stroke-dasharray="4 2"/>
+                        <polygon points="84,70 92,70 88,78" fill="#2196f3">
+                            <animateTransform attributeName="transform" type="translate" values="0,0;0,8;0,0" dur="1.2s" repeatCount="indefinite"/>
+                        </polygon>
+                    </g>
+                </svg>
+            </div>
+        </div>
     `;
     
 
-    // Supina - Presión (reducida)
+    // Supina - Presión (SVG animado: ondas sobre barriga echada, pierna natural, flecha presión hacia abajo)
     resultados.supina.presion.innerHTML = `
-        P = ${rho} kg/m³ × ${G} m/s² × ${h} m (reducida)<br>
-        <strong style="color: var(--secondary-color);">P = ${P_hidro_supina.toFixed(2)} Pa ≈ ${P_hidro_supina_mmHg.toFixed(2)} mmHg</strong>
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div>
+                P = ${rho} kg/m³ × ${G} m/s² × ${h} m (reducida)<br>
+                <strong style=\"color: var(--secondary-color);\">P = ${P_hidro_supina.toFixed(2)} Pa ≈ ${P_hidro_supina_mmHg.toFixed(2)} mmHg</strong>
+            </div>
+            <div style="margin-left: 16px; min-width: 90px;">
+                <svg width="120" height="80" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Cabello -->
+                    <ellipse cx="32" cy="40" rx="13" ry="10" fill="#7c4a1e"/>
+                    <ellipse cx="40" cy="48" rx="7" ry="5" fill="#7c4a1e"/>
+                    <!-- Cabeza -->
+                    <ellipse cx="40" cy="40" rx="12" ry="10" fill="#f9d6b5" stroke="#b48a78" stroke-width="1.5"/>
+                    <!-- Cuello -->
+                    <rect x="50" y="36" width="8" height="8" rx="4" fill="#f9d6b5" transform="rotate(20 54 40)"/>
+                    <!-- Brazos -->
+                    <rect x="60" y="28" width="28" height="7" rx="4" fill="#f9d6b5" stroke="#b48a78" stroke-width="1" transform="rotate(8 74 31.5)"/>
+                    <rect x="60" y="55" width="28" height="7" rx="4" fill="#f9d6b5" stroke="#b48a78" stroke-width="1" transform="rotate(-8 74 58.5)"/>
+                    <!-- Cuerpo -->
+                    <ellipse cx="70" cy="40" rx="28" ry="16" fill="#f9d6b5" stroke="#b48a78" stroke-width="1.5"/>
+                    <!-- Barriga (embarazo) -->
+                    <ellipse cx="88" cy="48" rx="16" ry="13" fill="#eabfae" stroke="#b48a78" stroke-width="1.2"/>
+                    <!-- Ondas de presión -->
+                    <ellipse cx="88" cy="48" rx="7" ry="3" fill="none" stroke="#2196f3" stroke-width="2">
+                        <animate attributeName="rx" values="7;16;7" dur="1.2s" repeatCount="indefinite"/>
+                        <animate attributeName="opacity" values="1;0;1" dur="1.2s" repeatCount="indefinite"/>
+                    </ellipse>
+                    <!-- Pierna (natural, solo una) -->
+                    <rect x="100" y="60" width="18" height="7" rx="4" fill="#b48a78">
+                        <animate attributeName="x" values="100;108;100" dur="1.2s" repeatCount="indefinite"/>
+                    </rect>
+                    <!-- Flecha presión (vertical) -->
+                    <g>
+                        <line x1="88" y1="48" x2="88" y2="75" stroke="#2196f3" stroke-width="2" stroke-dasharray="4 2"/>
+                        <polygon points="84,70 92,70 88,78" fill="#2196f3">
+                            <animateTransform attributeName="transform" type="translate" values="0,0;0,8;0,0" dur="1.2s" repeatCount="indefinite"/>
+                        </polygon>
+                    </g>
+                </svg>
+            </div>
+        </div>
     `;
     resultados.supina.presionMmHg.innerHTML = '';
     
-    // Supina - Presión Total
+    // Supina - Presión Total (SVG animado: ondas y flecha hacia abajo, pierna natural)
     resultados.supina.presionTotal.innerHTML = `
-        P_total = ${P_uterina} mmHg + ${P_hidro_supina_mmHg.toFixed(2)} mmHg<br>
-        <strong style="color: var(--secondary-color);">P_total = ${P_total_supina.toFixed(2)} mmHg</strong>
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div>
+                P_total = ${P_uterina} mmHg + ${P_hidro_supina_mmHg.toFixed(2)} mmHg<br>
+                <strong style=\"color: var(--secondary-color);\">P_total = ${P_total_supina.toFixed(2)} mmHg</strong>
+            </div>
+            <div style="margin-left: 16px; min-width: 90px;">
+                <svg width="120" height="80" viewBox="0 0 120 80" xmlns="http://www.w3.org/2000/svg">
+                    <!-- Cabello -->
+                    <ellipse cx="32" cy="40" rx="13" ry="10" fill="#7c4a1e"/>
+                    <ellipse cx="40" cy="48" rx="7" ry="5" fill="#7c4a1e"/>
+                    <!-- Cabeza -->
+                    <ellipse cx="40" cy="40" rx="12" ry="10" fill="#f9d6b5" stroke="#b48a78" stroke-width="1.5"/>
+                    <!-- Cuello -->
+                    <rect x="50" y="36" width="8" height="8" rx="4" fill="#f9d6b5" transform="rotate(20 54 40)"/>
+                    <!-- Brazos -->
+                    <rect x="60" y="28" width="28" height="7" rx="4" fill="#f9d6b5" stroke="#b48a78" stroke-width="1" transform="rotate(8 74 31.5)"/>
+                    <rect x="60" y="55" width="28" height="7" rx="4" fill="#f9d6b5" stroke="#b48a78" stroke-width="1" transform="rotate(-8 74 58.5)"/>
+                    <!-- Cuerpo -->
+                    <ellipse cx="70" cy="40" rx="28" ry="16" fill="#f9d6b5" stroke="#b48a78" stroke-width="1.5"/>
+                    <!-- Barriga (embarazo) -->
+                    <ellipse cx="88" cy="48" rx="16" ry="13" fill="#eabfae" stroke="#b48a78" stroke-width="1.2"/>
+                    <!-- Ondas de presión -->
+                    <ellipse cx="88" cy="48" rx="7" ry="3" fill="none" stroke="#2196f3" stroke-width="2">
+                        <animate attributeName="rx" values="7;16;7" dur="1.2s" repeatCount="indefinite"/>
+                        <animate attributeName="opacity" values="1;0;1" dur="1.2s" repeatCount="indefinite"/>
+                    </ellipse>
+                    <!-- Pierna (natural, solo una) -->
+                    <rect x="100" y="60" width="18" height="7" rx="4" fill="#b48a78">
+                        <animate attributeName="x" values="100;108;100" dur="1.2s" repeatCount="indefinite"/>
+                    </rect>
+                    <!-- Flecha presión total (vertical) -->
+                    <g>
+                        <line x1="88" y1="48" x2="88" y2="75" stroke="#4caf50" stroke-width="2" stroke-dasharray="4 2"/>
+                        <polygon points="84,70 92,70 88,78" fill="#4caf50">
+                            <animateTransform attributeName="transform" type="translate" values="0,0;0,8;0,0" dur="1.2s" repeatCount="indefinite"/>
+                        </polygon>
+                    </g>
+                </svg>
+            </div>
+        </div>
     `;
 
     // ====== ACTUALIZAR GRÁFICOS ======
