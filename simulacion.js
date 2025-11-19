@@ -362,13 +362,16 @@ function actualizarGraficos(datos) {
                 },
                 datalabels: {
                     anchor: 'end',
-                    align: 'top',
+                    align: 'end',
                     formatter: (value) => value.toFixed(2),
                     font: {
                         weight: 'bold',
-                        size: 14
+                        size: 20
                     },
-                    color: '#333'
+                    color: '#111',
+                    backgroundColor: 'rgba(255,255,255,0.85)',
+                    borderRadius: 4,
+                    padding: 6
                 }
             },
             scales: {
