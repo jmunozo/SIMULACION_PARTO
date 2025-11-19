@@ -70,6 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
     inicializarEventListeners();
     actualizarDisplays();
     actualizarAnimacion();
+    // No calcular resultados automáticamente
 });
 
 // ===================================
