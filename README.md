@@ -11,7 +11,6 @@ Interfaz web interactiva que compara posición vertical vs posición supina dura
 3. **Trabajo Mecánico Supina**: `W = F × d × cos(90°)` → `W = 0`
 4. **Presión Hidrostática**: `P = ρ × g × h`
 5. **Conversión**: `P_mmHg = P_Pa / 133.322`
-6. **Momento de Fuerza**: `τ = r × F × sen(θ)`
 7. **Presión Total**: `P_total = P_uterina + P_hidrostática`
 
 ### Valores Predeterminados:
@@ -19,8 +18,6 @@ Interfaz web interactiva que compara posición vertical vs posición supina dura
 - Altura del canal: 0.15 m
 - Altura uterina: 0.30 m
 - Densidad líquido amniótico: 1006 kg/m³
-- Brazo de palanca: 0.05 m
-- Ángulo de rotación: 30°
 - Fuerza de contracción: 50 mmHg
 
 ## 🛡️ Validaciones Implementadas
@@ -98,7 +95,8 @@ Luego abre: `http://localhost:8000`
 
 ## 📊 Características
 
-✅ **Actualización en tiempo real** - Los sliders actualizan instantáneamente  
+✅ **Animación y displays en tiempo real** - Los sliders actualizan la animación y los valores instantáneamente  
+✅ **Resultados y gráficos solo al presionar "CALCULAR COMPARATIVA"**  
 ✅ **Animación SVG** - Visualización del descenso fetal  
 ✅ **4 Gráficos comparativos** - Chart.js con animaciones  
 ✅ **Conclusiones automáticas** - Análisis inteligente con porcentajes  
