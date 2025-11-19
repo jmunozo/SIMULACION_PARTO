@@ -225,6 +225,16 @@ header h1 {
 
 #svg-vertical,
 #svg-supina {
+    width: 100%;
+    height: auto;
+    max-width: 400px;
+    max-height: 400px;
+    display: block;
+    margin: 0 auto;
+}
+
+#svg-vertical,
+#svg-supina {
     border: 2px solid var(--border-color);
     border-radius: 10px;
     background: white;
