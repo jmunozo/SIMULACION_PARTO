@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de posiciones de parto - Comparativa física</title>
+    <link rel="stylesheet" href="estilos.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏥 Simulador de posiciones de parto</h1>
+            <p class="subtitle">Análisis comparativo basado en principios físicos</p>
+        </header>
+
+        <div class="main-content">
+            <!-- Panel de Inputs -->
+            <section class="input-panel card">
+                <h2>📋 Parámetros del caso clínico</h2>
+                
+                <div class="input-grid">
+                    <div class="input-group">
+                        <label for="peso-bebe">
+                            Peso del bebé (kg)
+                            <span class="tooltip">💡 Peso estimado del feto</span>
+                        </label>
+                        <input type="number" id="peso-bebe" value="3.5" step="0.1" min="2" max="5" required>
+                        <span class="value-display" id="peso-display">3.5 kg</span>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="altura-canal">
+                            Altura del canal de parto (m)
+                            <span class="tooltip">💡 Distancia de descenso estimada</span>
+                        </label>
+                        <input type="number" id="altura-canal" value="0.15" step="0.01" min="0.05" max="0.30" required>
+                        <span class="value-display" id="altura-display">0.15 m</span>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="altura-uterina">
+                            Altura uterina (m)
+                            <span class="tooltip">💡 Para cálculo de presión hidrostática</span>
+                        </label>
+                        <input type="number" id="altura-uterina" value="0.30" step="0.01" min="0.10" max="0.50" required>
+                        <span class="value-display" id="altura-display-u">0.30 m</span>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="densidad-liquido">
+                            Densidad líquido amniótico (kg/m³)
+                            <span class="tooltip">💡 Valor estándar: 1006 kg/m³</span>
+                        </label>
+                        <input type="number" id="densidad-liquido" value="1006" step="1" min="1000" max="1020" required>
+                        <span class="value-display" id="densidad-display">1006 kg/m³</span>
+                    </div>
+
+
+                    <div class="input-group">
+                        <label for="fuerza-contraccion">
+                            Fuerza de contracción (mmHg)
+                            <span class="tooltip">💡 Presión promedio de contracción</span>
+                        </label>
+                        <input type="number" id="fuerza-contraccion" value="50" step="5" min="20" max="100" required>
+                        <span class="value-display" id="contraccion-display">50 mmHg</span>
+                    </div>
+                </div>
+
+                <button id="calcular-btn" class="btn-primary">🔬 Calcular Comparativa</button>
+                <button id="reset-btn" class="btn-secondary">🔄 Restablecer Valores</button>
+            </section>
+
+            <!-- Animación de Descenso Fetal -->
+            <section class="animation-panel card">
+                <h2>📊 Visualización del Descenso Fetal</h2>
+                <div class="animation-container">
+                    <div class="position-column">
+                        <h3>Posición Vertical</h3>
+                        <svg id="svg-vertical" width="200" height="400">
+                            <!-- Canal de parto -->
+                            <rect x="75" y="50" width="50" height="300" fill="#e0f7fa" stroke="#00838f" stroke-width="2" rx="25"/>
+                            <!-- Bebé -->
+                            <circle id="bebe-vertical" cx="100" cy="80" r="20" fill="#ff6b6b"/>
+                            <circle cx="95" cy="75" r="3" fill="#fff"/>
+                            <circle cx="105" cy="75" r="3" fill="#fff"/>
+                            <path d="M 95 85 Q 100 88 105 85" stroke="#fff" fill="none" stroke-width="2"/>
+                            <!-- Flecha gravitacional -->
+                            <line x1="100" y1="120" x2="100" y2="180" stroke="#4caf50" stroke-width="3" marker-end="url(#arrowgreen)"/>
+                            <text x="110" y="150" fill="#4caf50" font-size="12" font-weight="bold">F=mg</text>
+                        </svg>
+                    </div>
+                    <div class="position-column">
+                        <h3>Posición Supina</h3>
+                        <svg id="svg-supina" width="400" height="200">
+                            <!-- Canal de parto horizontal -->
+                            <rect x="50" y="75" width="300" height="50" fill="#ffe0e0" stroke="#c62828" stroke-width="2" rx="25"/>
+                            <!-- Bebé -->
+                            <circle id="bebe-supina" cx="80" cy="100" r="20" fill="#ff6b6b"/>
+                            <circle cx="75" cy="95" r="3" fill="#fff"/>
+                            <circle cx="85" cy="95" r="3" fill="#fff"/>
+                            <path d="M 75 105 Q 80 108 85 105" stroke="#fff" fill="none" stroke-width="2"/>
+                            <!-- Flecha gravitacional (perpendicular) -->
+                            <line x1="80" y1="130" x2="80" y2="170" stroke="#ff9800" stroke-width="3" marker-end="url(#arroworange)"/>
+                            <text x="90" y="150" fill="#ff9800" font-size="12" font-weight="bold">F=mg</text>
+                        </svg>
+                    </div>
+                    <!-- Definición de flechas SVG -->
+                    <svg width="0" height="0">
+                        <defs>
+                            <marker id="arrowgreen" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                                <polygon points="0,0 10,5 0,10" fill="#4caf50"/>
+                            </marker>
+                            <marker id="arroworange" markerWidth="10" markerHeight="10" refX="5" refY="5" orient="auto">
+                                <polygon points="0,0 10,5 0,10" fill="#ff9800"/>
+                            </marker>
+                        </defs>
+                    </svg>
+                </div>
+            </section>
+
+            <!-- Resultados comparativos -->
+            <section class="results-section">
+                <h2>📈 Resultados comparativos</h2>
+                
+                <div class="results-grid">
+                    <!-- Posición Vertical -->
+                    <div class="result-card card vertical-card">
+                        <h3>🟢 Posición Vertical</h3>
+                        
+                        <div class="result-item">
+                            <h4>Fuerza Gravitacional</h4>
+                            <p class="formula">F = m × g</p>
+                            <p class="result-value" id="fuerza-vertical">-</p>
+                        </div>
+
+                        <div class="result-item">
+                            <h4>Trabajo Mecánico</h4>
+                            <p class="formula">W = F × d × cos(0°)</p>
+                            <p class="result-value" id="trabajo-vertical">-</p>
+                        </div>
+
+                        <div class="result-item">
+                            <h4>Presión Hidrostática</h4>
+                            <p class="formula">P = ρ × g × h</p>
+                            <p class="result-value" id="presion-vertical">-</p>
+                            <p class="result-subvalue" id="presion-vertical-mmhg">-</p>
+                        </div>
+
+                        <div class="result-item">
+                            <h4>Presión Total Efectiva</h4>
+                            <p class="formula">P_total = P_uterina + P_hidrostática</p>
+                            <p class="result-value" id="presion-total-vertical">-</p>
+                        </div>
+                    </div>
+
+                    <!-- Posición Supina -->
+                    <div class="result-card card supina-card">
+                        <h3>🔴 Posición Supina</h3>
+                        
+                        <div class="result-item">
+                            <h4>Fuerza Gravitacional</h4>
+                            <p class="formula">F = m × g</p>
+                            <p class="result-value" id="fuerza-supina">-</p>
+                        </div>
+
+                        <div class="result-item">
+                            <h4>Trabajo Mecánico</h4>
+                            <p class="formula">W = F × d × cos(90°) = 0</p>
+                            <p class="result-value" id="trabajo-supina">-</p>
+                        </div>
+
+                        <div class="result-item">
+                            <h4>Presión Hidrostática</h4>
+                            <p class="formula">P = ρ × g × h (reducida)</p>
+                            <p class="result-value" id="presion-supina">-</p>
+                            <p class="result-subvalue" id="presion-supina-mmhg">-</p>
+                        </div>
+
+                        <div class="result-item">
+                            <h4>Presión Total Efectiva</h4>
+                            <p class="formula">P_total = P_uterina + P_hidrostática</p>
+                            <p class="result-value" id="presion-total-supina">-</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Gráficos comparativos -->
+            <section class="charts-section">
+                <h2>📊 Gráficos comparativos</h2>
+                
+                <div class="charts-grid">
+                    <div class="chart-container card">
+                        <h3>Trabajo Mecánico</h3>
+                        <canvas id="chart-trabajo"></canvas>
+                    </div>
+
+                    <div class="chart-container card">
+                        <h3>Presión Hidrostática</h3>
+                        <canvas id="chart-presion"></canvas>
+                    </div>
+
+                    <div class="chart-container card">
+                        <h3>Presión Total Efectiva</h3>
+                        <canvas id="chart-presion-total"></canvas>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Conclusiones Automáticas -->
+            <section class="conclusions-section card">
+                <h2>💡 Conclusiones:</h2>
+                <div id="conclusiones-container">
+                    <p class="placeholder-text">Presiona "Calcular Comparativa" para ver las conclusiones basadas en los cálculos físicos.</p>
+                </div>
+            </section>
+        </div>
+
+        <footer>
+            <p>© 2025 Simulador de posiciones de parto | Basado en principios físicos del curso de FÍSICA PARA CCSS - UTP, Chiclayo</p>
+        </footer>
+    </div>
+
+    <script src="simulacion.js"></script>
+</body>
+</html>

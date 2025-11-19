@@ -1,0 +1,121 @@
+Objetivo:
+Construir una interfaz web interactiva en JavaScript/HTML/CSS (o React si prefieres) que permita comparar posición vertical vs posición supina durante el trabajo de parto usando los principios físicos:
+
+Fuerza gravitacional (F = m·g)
+
+Trabajo mecánico (W = F·d·cosθ)
+
+Presión hidrostática (P = ρ·g·h)
+
+Momento de fuerza (τ = r·F·senθ)
+
+Requerimientos de la interfaz:
+
+Inputs del usuario (caso clínico):
+
+Peso del bebé (kg)
+
+Altura del canal de parto / descenso estimado (m)
+
+Altura uterina (h en m, para presión hidrostática)
+
+Densidad del líquido amniótico (ρ, default 1006 kg/m³)
+
+Brazo de palanca fetal (r, default 0.05 m)
+
+Ángulo de rotación fetal (θrot, default 30°)
+
+Opcional: fuerza promedio de contracción uterina (mmHg), default 50 mmHg
+
+Botón “Calcular comparativa”.
+
+Salidas calculadas para cada posición (vertical vs supina):
+a. Fuerza gravitacional:
+
+F = m·g
+
+b. Trabajo mecánico:
+
+Vertical: Wv = F·d·cos(0°)
+
+Supina: Ws = F·d·cos(90°) = 0
+
+c. Presión hidrostática:
+
+P = ρ·g·h
+
+Mostrar P en Pa y equivalente en mmHg
+
+d. Momento de fuerza (rotación fetal):
+
+τ = r·F·sen(θrot)
+
+Comparativa visual:
+
+Gráfico de barras lado a lado:
+
+Trabajo mecánico vertical vs supina
+
+Presión hidrostática vertical vs supina
+
+Momento de fuerza vertical vs supina
+
+Mostrar además una “barra total” que combine:
+
+Ajuste simple: Presión uterina + presión hidrostática
+
+Simulador dinámico:
+
+Cuando el usuario mueve sliders de peso, altura o r, actualizar los gráficos en tiempo real.
+
+Mostrar animación sencilla del bebé descendiendo (SVG o canvas).
+
+Diseño:
+
+Simple, limpio, estilo dashboard.
+
+Tarjetas para cada resultado.
+
+Gráficos con Chart.js.
+
+Cálculos y fórmulas que Copilot debe incluir literalmente en el código:
+
+F = m * 9.8
+
+W_vertical = F * d * Math.cos(0 * Math.PI/180)
+
+W_supina = F * d * Math.cos(90 * Math.PI/180)
+
+P = rho * 9.8 * h
+
+P_mmHg = P / 133.322
+
+torque = r * F * Math.sin(theta_rot_rad)
+
+Salida final esperada:
+
+Bloques comparativos claros:
+
+“Desempeño en posición vertical”
+
+“Desempeño en posición supina”
+
+Mostrar conclusiones automáticas:
+
+Cuál posición genera mayor trabajo útil
+
+Cuál posición produce mayor presión hidrostática efectiva
+
+Cuál posición facilita más la rotación fetal
+
+Todo generado automáticamente según los cálculos.
+
+Entrega esperada del código:
+
+Archivo HTML con UI.
+
+Archivo JS separado con cálculos, listeners y gráficos.
+
+Archivo CSS básico para estilos.
+
+Comentarios explicativos en cada fórmula.
